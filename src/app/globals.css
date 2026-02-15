@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  /* Defining your brand colors in the Tailwind theme */
   --color-brand-gold: #D4AF37;
   --color-esky-blue: #295eb8;
   
-  /* Keyframes for your pulsing effect */
   @keyframes pulse-glow {
     0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
     50% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
@@ -13,7 +11,6 @@
   }
 }
 
-/* Base Styles */
 @layer base {
   body {
     @apply bg-[#0a0a0b] text-white antialiased overflow-x-hidden;
@@ -24,25 +21,27 @@
   }
 }
 
-/* Component Styles */
 @layer components {
-  /* The Glass Morphism Card */
+  /* Glass Card */
   .glass-card {
-    /* v4 uses color-mix or alpha channel hex for backgrounds in CSS files */
-    background-color: color-mix(in srgb, var(--color-zinc-900) 50%, transparent);
+    background-color: rgba(24, 24, 27, 0.5); /* Direct RGBA for zinc-900/50 */
     @apply backdrop-blur-xl border border-white/10 rounded-[2rem];
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* The "Tech Glow" effect */
+  /* Glow Border */
   .glow-border {
     @apply relative z-0;
   }
   
   .glow-border::after {
     content: "";
-    @apply absolute -inset-[1px] -z-10 rounded-inherit opacity-0 transition-opacity duration-500;
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit; /* Standard CSS works best here */
     background: linear-gradient(45deg, var(--color-brand-gold), transparent, #3b82f6);
+    @apply opacity-0 transition-opacity duration-500;
   }
 
   .glow-border:hover::after {
@@ -55,7 +54,7 @@
   }
 }
 
-/* Background Mesh Effect */
+/* Background Mesh */
 .bg-mesh {
   @apply fixed inset-0 pointer-events-none;
   background: 
